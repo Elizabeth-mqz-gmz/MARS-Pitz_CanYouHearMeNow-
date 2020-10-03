@@ -11,14 +11,14 @@ pygame.display.set_caption('MARS-Pitz - Antenna')
 
 
 # antennaImg = pygame.image.load('antenna.png')
-bandera = False
+startedGame = False
 
 def AntennaDisplay(x,y):
     gameDisplay.blit(antennaImg, (x,y))
 
 
 # Starts the game
-def GameLoop(bandera):
+def GameLoop(startedGame):
 
     x = (displayWidth * 0.7)
     y = (displayHeight * 0.8)
@@ -37,7 +37,7 @@ def GameLoop(bandera):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
 
-                    if bandera:
+                    if startedGame:
                         clock.tick()
                         print ("Se reinicio el tiempo")
 
@@ -52,11 +52,11 @@ def GameLoop(bandera):
                 if event.key == pygame.K_SPACE:
                     #time = pygame.time.Clock.tick
 
-                    if bandera:
+                    if startedGame:
                         time = clock.get_time()/1000
 
                         if time > 3:
-                            #bandera = False
+                            #startedGame = False
                             print ("Mal hecho")
 
                         else:
@@ -65,10 +65,10 @@ def GameLoop(bandera):
                             clock.tick()
 
                     else:
-                        bandera = True
+                        startedGame = True
 
 # Starts
-GameLoop(bandera)
+GameLoop(startedGame)
 
 # Exit from the game window
 game.quit()
