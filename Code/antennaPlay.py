@@ -21,6 +21,8 @@ antImg = pg.image.load('../Media/Antenna/Antenna.png')
 wndImg = pg.image.load('../Media/Antenna/Window.png')
 walImg = pg.image.load('../Media/Antenna/Wall.png')
 wvsImg = pg.image.load('../Media/Antenna/Waves.png')
+srnImg = pg.image.load('../Media/Antenna/Screen.png')
+prgImg = pg.image.load('../Media/Antenna/Paragraph.png')
 
 sunImg = pg.transform.scale(sunImg, (500, 500))
 conImg = pg.transform.scale(conImg, (500, 250))
@@ -28,7 +30,8 @@ antImg = pg.transform.scale(antImg, (300, 600))
 wndImg = pg.transform.scale(wndImg, (300, 600))
 walImg = pg.transform.scale(walImg, (300, 600))
 wvsImg = pg.transform.scale(wvsImg, (531, 1062))
-
+srnImg = pg.transform.scale(srnImg, (250, 500))
+prgImg = pg.transform.scale(prgImg, (200, 270))
 
 
 #background paint
@@ -38,6 +41,8 @@ screen.blit(antImg, (300,100))
 screen.blit(wndImg, (300,0))
 screen.blit(walImg, (0,0))
 screen.blit(conImg, (0,350))
+screen.blit(srnImg, (0,0))
+screen.blit(prgImg, (0,0))
 screen.blit(sunImg, (0,380),(0,0,250,250))
 
 
