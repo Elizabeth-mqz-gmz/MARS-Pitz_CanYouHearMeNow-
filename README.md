@@ -1,0 +1,2 @@
+# MARS-Pitz_CanYouHearMeNow-
+The team will focus on the development of a videogame using Pygame modules (Python language). The proposal is to create a series of mini-games focused on the solution of tasks related to communication from Earth to Mars. This mini-games are based on real activities that represent difficulties for NASA in the communication area, which will create awareness and learning about the different functions of the agency.
