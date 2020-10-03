@@ -50,17 +50,19 @@ label = pg.font.SysFont('Sans Roman', 20)
 txt = label.render(pgpf, False, (0, 0, 0))
 #screen.blit(txt,(0,0),(0,0,200,500))
 
+#test
+v=0
 l=0
 #display the level
 if l == 0:
-    screen.blit(sunImg, (0,380),(250,250,500,500))   
+    screen.blit(sunImg, (0,380),(250,250,250,250))   
     screen.blit(wvsImg, (390,0),(0,0,177,354))   
 elif l == 1: 
-    screen.blit(sunImg, (0,380),(250,0,500,250))  
-    screen.blit(wvsImg, (390,0),(177,708,354,1063))   
+    screen.blit(sunImg, (0,380),(0,250,250,250))  
+    screen.blit(wvsImg, (390,0),(177,354,177,354))     
 else:
-    screen.blit(sunImg, (0,380),(0,250,250,500))  
-    screen.blit(wvsImg, (390,0),(177,354,354,354))   
+    screen.blit(sunImg, (0,380),(250,0,250,250))  
+    screen.blit(wvsImg, (390,0),(177,708,177,354)) 
 
 
 
@@ -72,25 +74,25 @@ pg.display.update()
 def onda(vel,lev):
     if lev == 0:
         if vel == 0:
-            screen.blit(wvsImg, (390,0),(177,0,354,354))   
+            screen.blit(wvsImg, (390,0),(177,0,177,354))   
         elif vel == 1:
-            screen.blit(wvsImg, (390,0),(354,354,531,708))   
+            screen.blit(wvsImg, (390,0),(354,354,177,354))   
         elif vel == 2:    
-            screen.blit(wvsImg, (390,0),(0,708,177,1063))   
+            screen.blit(wvsImg, (390,0),(0,708,177,354))   
     elif lev == 1:
         if vel == 0:
-            screen.blit(wvsImg, (390,0),(354,0,531,354))   
+            screen.blit(wvsImg, (390,0),(354,0,177,354))   
         elif vel == 1:
-            screen.blit(wvsImg, (390,0),(0,354,177,708))   
+            screen.blit(wvsImg, (390,0),(0,354,177,354))   
         elif vel == 2:    
-            screen.blit(wvsImg, (390,0),(0,708,177,1063))   
+            screen.blit(wvsImg, (390,0),(0,708,177,354))   
     elif lev == 2:
         if vel == 0:
-            screen.blit(wvsImg, (390,0),(354,0,531,354))   
+            screen.blit(wvsImg, (390,0),(354,0,177,354))   
         elif vel == 1:
-            screen.blit(wvsImg, (390,0),(354,354,531,708))   
+            screen.blit(wvsImg, (390,0),(354,354,177,354))   
         elif vel ==2:    
-            screen.blit(wvsImg, (390,0),(354,708,351,1063))   
+            screen.blit(wvsImg, (390,0),(354,708,177,354))   
 
 
 
@@ -103,8 +105,7 @@ while playing:
             playing = False
 
     #v = funcionEliChava()
-    v=1
-    l=0
+    
     onda(v,l)
 
     pg.display.update()
