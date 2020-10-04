@@ -1,5 +1,6 @@
 import pygame as pg
 import random
+from time import time
 
 MEDIAPATH = "../Media/Astronaut/"
 
@@ -26,6 +27,7 @@ class Astronaut:
         self.head = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
         self.jumpping = { "isJummping" : False,
                             "up" : False}
+        self.sprite = 0
 
     def jump(self):
 
@@ -33,7 +35,7 @@ class Astronaut:
         #finishes a jump cycle, this means
         #that he must go up and down to do it again
 
-        max = 200
+        max = displayHeight - self.image.get_height() - 100
         min = displayHeight - self.image.get_height()
         increment = 1
 
@@ -48,19 +50,39 @@ class Astronaut:
                 if self.coord[1] >= min:
                     self.jumpping["up"] = True
                     self.jumpping["isJummping"] = False
+        else:
+            self.move()
+        width = self.image.get_width()/6
+        gameDisplay.blit(self.image, (self.coord[0], self.coord[1]), (width * self.sprite, 0, width, self.image.get_height()))
 
-        printImage(self.image, self.coord[0], self.coord[1])
+    #Animate astronaut running
+    def move(self):
+        if self.sprite  < 5 :
+            self.sprite += 1
+        else:
+            self.sprite = 0
 
 class Obstacle:
     def __init__(self, image, x, y):
         self.image = pg.image.load(MEDIAPATH + image)
+        self.image = pg.transform.scale(self.image, (self.image.get_width()*3, self.image.get_height()*3))
+
+        self.sprite = self.defineObs()
         self.coord = [x,y]
         self.pas = False
+
+    def defineObs(self):
+        rand = random.randrange(0, 6)
+        rand = 5
+        w = self.image.get_width() / 2
+        h = self.image.get_height() / 3
+        sprites = [[0,0],[w,0], [0,h], [w,h],[0,h*2], [w,h*2]]
+        return (sprites[rand][0],sprites[rand][1], sprites[rand][0]+w, sprites[rand][1]+h)
 
     def move(self, vel):
         if self.image.get_width() + self.coord[0] > 0:
             self.coord[0] -= vel
-            printImage(self.image, self.coord[0],self.coord[1])
+            gameDisplay.blit(self.image, (self.coord[0], self.coord[1]), self.sprite)
 
         #The atronaut pased the obstacle
         else:
@@ -126,11 +148,11 @@ def Final_Msg(points):
 
 def gameLoop():
 
-    astro = Astronaut("astronaut.png")
+    astro = Astronaut("Run.png")
     # obs1 = Obstacle("obstacle1.png")
     obs_vec,obs_vec_up = [], []
-    obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
-    obs_vec_up.append(Obstacle("obstacle1.png",displayWidth - 65,displayHeight - 500 ))
+    obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 50 ))
+    obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth - 65,displayHeight - 500 ))
 
     points = 0
     # interference
@@ -163,7 +185,7 @@ def gameLoop():
                     # Make random the time of creation of new obstacles
                     time = random.randrange(2,6)
                     pg.time.set_timer(pg.USEREVENT+1, 1000*time)
-                    obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
+                    obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 50 ))
 
                 if event.type == pg.USEREVENT+2:
                     pg.time.set_timer(pg.USEREVENT+2, 0)
@@ -174,17 +196,17 @@ def gameLoop():
                     change = True
 
                 if event.type == pg.USEREVENT+4:
-                    obs_vec_up.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 500 ))
+                    obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 500 ))
 
-            gameDisplay.fill((255,255,255))
+            gameDisplay.fill((0,0,0))
 
-            if len(obs_vec):
-                if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
-                    astro.crashed = check(astro, obs_vec[0], False)
-
-            if len(obs_vec_up):
-                if obs_vec_up[0].coord[0] <= astro.head[1] and obs_vec_up[0].coord[0] >= astro.head[0]:
-                    astro.crashed = check(astro, obs_vec_up[0], True)
+            # if len(obs_vec):
+            #     if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
+            #         astro.crashed = check(astro, obs_vec[0], False)
+            #
+            # if len(obs_vec_up):
+            #     if obs_vec_up[0].coord[0] <= astro.head[1] and obs_vec_up[0].coord[0] >= astro.head[0]:
+            #         astro.crashed = check(astro, obs_vec_up[0], True)
 
             # Ground objects
             i = 0
