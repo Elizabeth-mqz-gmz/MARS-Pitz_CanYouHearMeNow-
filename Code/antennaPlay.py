@@ -23,6 +23,7 @@ wvsImg = pg.image.load('../Media/Antenna/Waves.png')
 srnImg = pg.image.load('../Media/Antenna/Screen.png')
 prgImg = pg.image.load('../Media/Antenna/Paragraph.png')
 cldImg = pg.image.load('../Media/Antenna/Cloud.png')
+barImg = pg.image.load('../Media/Antenna/Bar.png')
 
 sunImg = pg.transform.scale(sunImg, (500, 500))
 conImg = pg.transform.scale(conImg, (500, 250))
@@ -33,6 +34,7 @@ wvsImg = pg.transform.scale(wvsImg, (531, 1062))
 srnImg = pg.transform.scale(srnImg, (250, 500))
 prgImg = pg.transform.scale(prgImg, (200, 270))
 cldImg = pg.transform.scale(cldImg, (100, 100))
+barImg = pg.transform.scale(barImg, (333, 625))
 
 
 #background paint
@@ -47,6 +49,7 @@ screen.blit(conImg, (0,350))
 screen.blit(srnImg, (0,0))
 screen.blit(prgImg, (0,0))
 screen.blit(sunImg, (0,380),(0,0,250,250))
+screen.blit(barImg, (7,310),(0,0,333,41))
 
 
 
@@ -95,6 +98,16 @@ def onda(vel,lev):
             screen.blit(wvsImg, (390,0),(354,708,177,354))   
 
 
+def barUpdate(level, sublevel):
+    if level == 1:
+        sublevel = sublevel + 5
+    elif level == 2:
+        sublevel = sublevel + 10
+
+    fac = int(sublevel*41.6)
+
+    screen.blit(barImg, (7,310),(0,fac,333,41))
+
 
 #play
 playing = True
@@ -104,7 +117,7 @@ while playing:
         if events.type == pg.QUIT:
             playing = False
 
-    #v = funcionEliChava()
+    #barUpdate(2,3)
     
     onda(v,l)
 
