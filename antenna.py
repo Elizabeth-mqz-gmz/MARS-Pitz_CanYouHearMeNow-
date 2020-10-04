@@ -38,7 +38,7 @@ wvsImg = pg.transform.scale(wvsImg, (531, 1062))
 srnImg = pg.transform.scale(srnImg, (360, 500))
 prgImg = pg.transform.scale(prgImg, (300, 270))
 cldImg = pg.transform.scale(cldImg, (100, 100))
-barImg = pg.transform.scale(barImg, (333, 625))
+barImg = pg.transform.scale(barImg, (333, 665))
 winImg = pg.transform.scale(winImg, (384, 96))
 
 def Draw(level, sublevel, limits, vel, fg):
