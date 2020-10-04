@@ -1,12 +1,29 @@
 import pygame as pg
 import random
 
+MEDIAPATH = "../Media/Astronaut/"
+
+class Signal:
+    def __init__ (self, image, x, y):
+        self.image = pg.image.load(MEDIAPATH + image)
+        self.image = pg.transform.scale(self.image, (300, 300))
+        self.coord = [x,y]
+        self.level = 1
+
+    def change (self):
+        coords = [[0, self.image.get_height()/2], [self.image.get_width()/2,0],
+        [0,0], [self.image.get_width()/2,self.image.get_height()/2]]
+        # printImage(self.image, self.coord[0], self.coord[1])
+        gameDisplay.blit(self.image, (self.coord[0], self.coord[1]), (coords[self.level - 1][0], coords[self.level - 1][1], self.image.get_width()/2, self.image.get_height()/2))
+
+
 class Astronaut:
     def __init__(self,image):
-        self.image = pg.image.load(image)
+        self.image = pg.image.load(MEDIAPATH + image)
         self.coord = [0,displayHeight-self.image.get_height()]
         self.crashed = False
         self.foot = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
+        self.head = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
         self.jumpping = { "isJummping" : False,
                             "up" : False}
 
@@ -36,7 +53,7 @@ class Astronaut:
 
 class Obstacle:
     def __init__(self, image, x, y):
-        self.image = pg.image.load(image)
+        self.image = pg.image.load(MEDIAPATH + image)
         self.coord = [x,y]
         self.pas = False
 
@@ -49,8 +66,10 @@ class Obstacle:
         else:
             self.pas = True
 
-def check(astro,obs):
-    if astro.image.get_height() + astro.coord[1] >= obs.coord[1]:
+def check(astro,obs, up):
+    if astro.image.get_height() + astro.coord[1] >= obs.coord[1] and up == False:
+        return True
+    if astro.coord[1] <= obs.coord[1] + obs.image.get_height() and up == True:
         return True
 
 
@@ -109,14 +128,14 @@ def gameLoop():
 
     astro = Astronaut("astronaut.png")
     # obs1 = Obstacle("obstacle1.png")
-    no_objetos = 20
-    obs_vec = []
+    obs_vec,obs_vec_up = [], []
     obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
+    obs_vec_up.append(Obstacle("obstacle1.png",displayWidth - 65,displayHeight - 500 ))
 
     points = 0
     # interference
     # The astronaut could receive the instructions with delay
-    inter = 1
+    signal = Signal("Signal.png",10,10)
 
     change = False
     time = 1
@@ -133,16 +152,16 @@ def gameLoop():
 
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_UP and not astro.jumpping["isJummping"]:
-                        pg.time.set_timer(pg.USEREVENT+2, 100*inter)
+                        pg.time.set_timer(pg.USEREVENT+2, 100*signal.level)
 
                 if event.type == pg.USEREVENT+1:
                     # print(time)
                     if time > 3 and change:
-                        inter = random.randrange(1, 5)
-                        print(inter)
+                        signal.level = random.randrange(1, 4)
                         change = False
+                        print(signal.level)
                     # Make random the time of creation of new obstacles
-                    time = random.randrange(1,6)
+                    time = random.randrange(2,6)
                     pg.time.set_timer(pg.USEREVENT+1, 1000*time)
                     obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
 
@@ -154,24 +173,43 @@ def gameLoop():
                 if event.type == pg.USEREVENT+3:
                     change = True
 
-            gameDisplay.fill((0,0,0))
+                if event.type == pg.USEREVENT+4:
+                    obs_vec_up.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 500 ))
+
+            gameDisplay.fill((255,255,255))
 
             if len(obs_vec):
                 if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
-                    astro.crashed = check(astro, obs_vec[0])
+                    astro.crashed = check(astro, obs_vec[0], False)
 
+            if len(obs_vec_up):
+                if obs_vec_up[0].coord[0] <= astro.head[1] and obs_vec_up[0].coord[0] >= astro.head[0]:
+                    astro.crashed = check(astro, obs_vec_up[0], True)
+
+            # Ground objects
             i = 0
             while i < len(obs_vec):
                 if not obs_vec[i].pas:
                     obs_vec[i].move(2)
                     i += 1
                 else:
-                    points += 1*inter
+                    points += 1*signal.level
                     obs = obs_vec.pop(0)
+                    del obs
+            # Head Objects
+            i = 0
+            while i < len(obs_vec_up):
+                if not obs_vec_up[i].pas:
+                    obs_vec_up[i].move(2)
+                    i += 1
+                else:
+                    points += 1*signal.level
+                    obs = obs_vec_up.pop(0)
                     del obs
 
 
             astro.jump()
+            signal.change()
             pg.display.flip()
     return points
 
@@ -191,8 +229,11 @@ pg.time.set_timer(pg.USEREVENT+1, 6000)
 # Change the delay
 pg.time.set_timer(pg.USEREVENT+3, 2000)
 
+# Set an event to instance obstacles (up)
+pg.time.set_timer(pg.USEREVENT+4, 4000)
+
 points = gameLoop()
-# Exit from the game
+# Exit from the game with a message saying your points.
 Final_Msg(points)
 pg.quit()
 quit()
