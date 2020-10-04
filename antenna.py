@@ -41,7 +41,7 @@ cldImg = pg.transform.scale(cldImg, (100, 100))
 barImg = pg.transform.scale(barImg, (333, 625))
 winImg = pg.transform.scale(winImg, (384, 96))
 
-def Draw(level, sublevel, limits, vel):
+def Draw(level, sublevel, limits, vel, fg):
     # Paint the background
     screen.fill((160,255,244))
 
@@ -57,16 +57,20 @@ def Draw(level, sublevel, limits, vel):
     screen.blit(sunImg, (0,380),(0,0,250,250))
     screen.blit(barImg, (7,310),(0,0,333,41))
 
-    SelectLevel(level)
+    check = True
+    SelectLevel(level,sublevel)
 
     if vel != 0:
-        Waves(vel, level, limits)
-
-    BarUpdate(level, sublevel)
+        if fg:
+            check = Waves(vel, level-1, limits)
+        else:
+            check = Waves(vel, level, limits)
+    pg.display.update()
+    return check
 
 #end
 def Win():
-    for x in range(1,5):
+    for x in [1,2,3,4,5]:
         if x%2 == 0:
             screen.blit(winImg, (108,276),(0,0,384,48))
         else:
@@ -75,45 +79,48 @@ def Win():
         tm.sleep(1)
 
 def BarUpdate(level, sublevel):
-
+    print(level,sublevel)
     if level == 1:
         sublevel += 5
     elif level == 2:
         sublevel += 10
     fac = int(sublevel*41.6)
     screen.blit(barImg, (7,310),(0,fac,333,41))
+    pg.display.update()
+
 
 # Display the specific image pattern of each level, and return the level's range
-def SelectLevel(level):
-    if level == 0:
+def SelectLevel(l,sl):
+    #print(l,sl)
+    
+
+    if l == 0:
         screen.blit(sunImg, (0,380),(0,250,250,250))
         screen.blit(wvsImg, (390,0),(0,0,177,354))
-        range = [limits[0], limits[1]]
-    elif level == 1:
+    elif l == 1:
         screen.blit(sunImg, (0,380),(250,0,250,250))
-        screen.blit(wvsImg, (390,0),(177,708,177,354))
-        range = [limits[2],limits[3]]
-    else:
-        screen.blit(sunImg, (0,380),(250,250,250,250))
         screen.blit(wvsImg, (390,0),(177,354,177,354))
-        range = [limits[4], limits[5]]
-    pg.display.update()
-    return range
+    elif l == 2:
+        screen.blit(sunImg, (0,380),(250,250,250,250))
+        screen.blit(wvsImg, (390,0),(177,708,177,354))
 
 # Display the waves effect of each space event
 def Waves(vel,lev, limits):
+    rt = False
     if lev == 0:
         if vel > limits[0] and vel <= limits[1]:
             screen.blit(wvsImg, (390,0),(177,0,177,354))
+            rt = True
         elif vel > limits[2] and vel < limits[0]:
             screen.blit(wvsImg, (390,0),(354,354,177,354))
-        else:
+        elif vel < limits[2]:
             screen.blit(wvsImg, (390,0),(0,708,177,354))
     elif lev == 1:
         if vel > limits[3]:
             screen.blit(wvsImg, (390,0),(354,0,177,354))
         elif vel > limits[2] and vel <= limits[3]:
             screen.blit(wvsImg, (390,0),(0,354,177,354))
+            rt = True
         elif vel < limits[2]:
             screen.blit(wvsImg, (390,0),(0,708,177,354))
     elif lev == 2:
@@ -123,94 +130,64 @@ def Waves(vel,lev, limits):
             screen.blit(wvsImg, (390,0),(354,354,177,354))
         elif vel > limits[4] and vel <= limits[5]:
             screen.blit(wvsImg, (390,0),(354,708,177,354))
+            rt = True
+    return rt
 
-# All the game's mechanics are in this function
-def GameLoop(startedGame):
+gameExit = False
 
-    # Initialize the loop settings
-    level = 0
+while not gameExit:
+
+    Draw(0, 0, limits, 0, False)
+    counterLevel = 0
     counterSubLevel = 0
-    range = SelectLevel(level)
-
-    # Loop if the user doesn't close the game
-    gameExit = False
-    while not gameExit:
-
-        # Set new level and sub-level. Get new range
-        if counterSubLevel == 5:
-            level += 1
-            counterSubLevel = 0
-            range = SelectLevel(level)
-
-        # Finish the program if the user closes the window
+    time = 0
+    startedGame = False
+    lose = False
+    
+    while not lose:
+        
         for event in pg.event.get():
+
             if event.type == pg.QUIT:
                 pg.quit()
                 quit()
 
-            # Check if the key "space" has been press
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_SPACE:
+            elif event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                if startedGame:
+                    clock.tick()
 
-                    # Restart the clock if it already exists
-                    if startedGame:
-                        clock.tick()
+                else:
+                    clock = pg.time.Clock()
+                    clock.tick()
+            
+            if event.type == pg.KEYUP and event.key == pg.K_SPACE:
+                if startedGame:
 
-                    # Initialize a clock if it doesn't exist
-                    else:
-                        clock = pg.time.Clock()
-                        clock.tick()
+                    time = clock.get_time()/1000
 
-            # Get in when you stop pressing "space"
-            if event.type == pg.KEYUP:
-                if event.key == pg.K_SPACE:
-
-                    # Calculate the time between the last "space" press
-                    if startedGame:
-                        time = clock.get_time()/1000
-
-                        # Display a specific image pattern
-                        Waves(time, level, limits)
-
-                        # Check if the time between taps is correct
-                        if (time < range[0]) or (time > range[1]):
-
-                            #startedGame = False
-                            level = 0
-                            counterSubLevel = 0
-                            # Show the level status in graphic way
-                            Draw(level, counterSubLevel, limits, time)
-                            #mostar linea vacia  (LOOOOOOOSEEEEER)
-
-
-                        else:
-                            clock.tick()
-                            counterSubLevel += 1
-                            # Show the level status in graphic way
-                            Draw(level, counterSubLevel, limits, time)
-
-                            # End the game when the user has finished the levels
-                            if level == 2 and counterSubLevel == 4:
-                                gameExit = True
-                                #felicidades msj
-
-
-                        pg.display.update()
-
+                    flag = False
+                    if counterSubLevel == 4:
+                        if counterLevel == 2:
+                            gameExit = True
+                            Win()
+                        counterSubLevel = 0
+                        counterLevel += 1
+                        flag = True
 
                     else:
-                        startedGame = True
+                        counterSubLevel += 1
+
+                    #print(flag, counterLevel,counterSubLevel)
+
+                    if Draw(counterLevel, counterSubLevel, limits, time, flag):
+                        clock.tick
+                        BarUpdate(counterLevel,counterSubLevel)
+                    else:
+                        lose = True
+                        tm.sleep(3)
+                        #msg loser
+                else:
+                    startedGame = True
 
 
-# This flag helps in the first loop
-startedGame = False
-
-Draw(0, 0, limits, 0)
-# Start the game
-GameLoop(startedGame)
-Win()
-
-
-# Exits from the game's window
-pg.quit()
 quit()
