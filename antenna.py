@@ -35,8 +35,8 @@ antImg = pg.transform.scale(antImg, (300, 600))
 wndImg = pg.transform.scale(wndImg, (300, 600))
 walImg = pg.transform.scale(walImg, (300, 600))
 wvsImg = pg.transform.scale(wvsImg, (531, 1062))
-srnImg = pg.transform.scale(srnImg, (250, 500))
-prgImg = pg.transform.scale(prgImg, (200, 270))
+srnImg = pg.transform.scale(srnImg, (360, 500))
+prgImg = pg.transform.scale(prgImg, (300, 270))
 cldImg = pg.transform.scale(cldImg, (100, 100))
 barImg = pg.transform.scale(barImg, (333, 625))
 winImg = pg.transform.scale(winImg, (384, 96))
@@ -86,7 +86,7 @@ def BarUpdate(level, sublevel):
 # Display the specific image pattern of each level, and return the level's range
 def SelectLevel(level):
     if level == 0:
-        screen.blit(sunImg, (0,380),(250,250,250,250))
+        screen.blit(sunImg, (0,380),(0,250,250,250))
         screen.blit(wvsImg, (390,0),(0,0,177,354))
         range = [limits[0], limits[1]]
     elif level == 1:
@@ -94,7 +94,7 @@ def SelectLevel(level):
         screen.blit(wvsImg, (390,0),(177,708,177,354))
         range = [limits[2],limits[3]]
     else:
-        screen.blit(sunImg, (0,380),(0,250,250,250))
+        screen.blit(sunImg, (0,380),(250,250,250,250))
         screen.blit(wvsImg, (390,0),(177,354,177,354))
         range = [limits[4], limits[5]]
     pg.display.update()
