@@ -1,5 +1,6 @@
 import pygame as pg
 import random as rd
+import time   as tm
 
 
 #init and display
@@ -33,6 +34,7 @@ srnImg = pg.image.load('../Media/Antenna/Screen.png')
 prgImg = pg.image.load('../Media/Antenna/Paragraph.png')
 cldImg = pg.image.load('../Media/Antenna/Cloud.png')
 barImg = pg.image.load('../Media/Antenna/Bar.png')
+winImg = pg.image.load('../Media/Antenna/Win.png')
 
 sunImg = pg.transform.scale(sunImg, (500, 500))
 conImg = pg.transform.scale(conImg, (500, 250))
@@ -44,6 +46,7 @@ srnImg = pg.transform.scale(srnImg, (250, 500))
 prgImg = pg.transform.scale(prgImg, (200, 270))
 cldImg = pg.transform.scale(cldImg, (100, 100))
 barImg = pg.transform.scale(barImg, (333, 625))
+winImg = pg.transform.scale(winImg, (384, 96))
 
 
 #background paint
@@ -117,6 +120,17 @@ def barUpdate(level, sublevel):
 
     screen.blit(barImg, (7,310),(0,fac,333,41))
 
+#end
+def win():
+    for x in range(1,5):
+        if x%2 == 0:
+            screen.blit(winImg, (108,276),(0,0,384,48))
+        else:
+            screen.blit(winImg, (108,276),(0,48,384,48))
+        pg.display.update()
+        tm.sleep(1)
+    #codigo de regreso a principal    
+
 
 #play
 playing = True
@@ -124,6 +138,7 @@ playing = True
 while playing:
     for events in pg.event.get():
         if events.type == pg.QUIT:
+            win()
             playing = False
 
     #barUpdate(2,3)
