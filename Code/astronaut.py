@@ -7,7 +7,7 @@ MEDIAPATH = "../Media/Astronaut/"
 class Signal:
     def __init__ (self, image, x, y):
         self.image = pg.image.load(MEDIAPATH + image)
-        self.image = pg.transform.scale(self.image, (300, 300))
+        self.image = pg.transform.scale(self.image, (100, 100))
         self.coord = [x,y]
         self.level = 1
 
@@ -23,8 +23,8 @@ class Astronaut:
         self.image = pg.image.load(MEDIAPATH + image)
         self.coord = [0,displayHeight-self.image.get_height()]
         self.crashed = False
-        self.foot = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
-        self.head = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
+        self.foot = (self.image.get_width()/12 - 20, self.image.get_width()/12 + 20)
+        self.head = (self.image.get_width()/12 - 20, self.image.get_width()/12 + 20)
         self.jumpping = { "isJummping" : False,
                             "up" : False}
         self.sprite = 0
@@ -37,7 +37,7 @@ class Astronaut:
 
         max = displayHeight - self.image.get_height() - 100
         min = displayHeight - self.image.get_height()
-        increment = 1
+        increment = 3
 
         if self.jumpping["isJummping"]:
             if self.coord[1] > max and self.jumpping["up"]:
@@ -46,7 +46,7 @@ class Astronaut:
                     self.jumpping["up"] = False
 
             elif self.coord[1] < min and not self.jumpping["up"]:
-                self.coord[1] += increment
+                self.coord[1] += 2
                 if self.coord[1] >= min:
                     self.jumpping["up"] = True
                     self.jumpping["isJummping"] = False
@@ -139,13 +139,13 @@ def gameLoop():
 
     # set
     hand = pg.image.load(MEDIAPATH + "Hand.png")
-    pg.transform.scale(hand, (192, 96))
+    hand = pg.transform.scale(hand, (448, 224))
 
     back = pg.image.load(MEDIAPATH + "Background.png")
-    pg.transform.scale(back, (800, 200))
+    back = pg.transform.scale(back, (800, 200))
 
     astro = Astronaut("Run.png")
-    # obs1 = Obstacle("obstacle1.png")
+
     obs_vec,obs_vec_up = [], []
     obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 56 ))
     obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth - 70,displayHeight - 350 ))
@@ -153,7 +153,7 @@ def gameLoop():
     points = 0
     # interference
     # The astronaut could receive the instructions with delay
-    signal = Signal("Signal.png",10,10)
+    signal = Signal("Signal.png",90,70)
 
     change = False
     time = 1
@@ -196,19 +196,21 @@ def gameLoop():
 
             gameDisplay.fill((0,0,0))
 
-            # if len(obs_vec):
-            #     if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
-            #         astro.crashed = check(astro, obs_vec[0], False)
-            #
-            # if len(obs_vec_up):
-            #     if obs_vec_up[0].coord[0] <= astro.head[1] and obs_vec_up[0].coord[0] >= astro.head[0]:
-            #         astro.crashed = check(astro, obs_vec_up[0], True)
+            if len(obs_vec):
+                if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
+                    astro.crashed = check(astro, obs_vec[0], False)
 
+            if len(obs_vec_up):
+                if obs_vec_up[0].coord[0] <= astro.head[1] and obs_vec_up[0].coord[0] >= astro.head[0]:
+                    astro.crashed = check(astro, obs_vec_up[0], True)
+
+            gameDisplay.blit(hand, (0,0 ))
+            gameDisplay.blit(back,(0, displayHeight - back.get_height()))
             # Ground objects
             i = 0
             while i < len(obs_vec):
                 if not obs_vec[i].pas:
-                    obs_vec[i].move(2)
+                    obs_vec[i].move(3)
                     i += 1
                 else:
                     points += 1*signal.level
@@ -218,15 +220,13 @@ def gameLoop():
             i = 0
             while i < len(obs_vec_up):
                 if not obs_vec_up[i].pas:
-                    obs_vec_up[i].move(2)
+                    obs_vec_up[i].move(3)
                     i += 1
                 else:
                     points += 1*signal.level
                     obs = obs_vec_up.pop(0)
                     del obs
 
-            gameDisplay.blit(hand, )
-            gameDisplay.blit(back, )
             astro.jump()
             signal.change()
             pg.display.flip()
