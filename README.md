@@ -1,9 +1,9 @@
 # NASA International Space Apps Challenge:
 
 ## Connect - Can you hear me now?
+This repository harbors all the scripts (python) and files used during the accomplishment of the NASA International Space Apps Challenge.
 
 ## MARS-Pitz
-This repository harbors all the scripts (python) and files used during the accomplishment of the NASA International Space Apps Challenge.
 
 
 
