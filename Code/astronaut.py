@@ -137,6 +137,13 @@ def Final_Msg(points):
 
 def gameLoop():
 
+    # set
+    hand = pg.image.load(MEDIAPATH + "Hand.png")
+    pg.transform.scale(hand, (192, 96))
+
+    back = pg.image.load(MEDIAPATH + "Background.png")
+    pg.transform.scale(back, (800, 200))
+
     astro = Astronaut("Run.png")
     # obs1 = Obstacle("obstacle1.png")
     obs_vec,obs_vec_up = [], []
@@ -218,7 +225,8 @@ def gameLoop():
                     obs = obs_vec_up.pop(0)
                     del obs
 
-
+            gameDisplay.blit(hand, )
+            gameDisplay.blit(back, )
             astro.jump()
             signal.change()
             pg.display.flip()
