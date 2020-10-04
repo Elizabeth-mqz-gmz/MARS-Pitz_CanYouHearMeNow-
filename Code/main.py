@@ -11,18 +11,21 @@ class Game:
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        self.load_data()
+
         self.go_to_minigame = False
         self.on_minigame = False
-        self.minigame_instance = False
+        self.minigame_class = False
+
+        self.game_folder = path.dirname(__file__)
+        self.media_folder = path.join(self.game_folder, '..', 'Media')
+        self.load_data()
 
     def load_data(self):
-        game_folder = path.dirname(__file__)
-        media_folder = path.join(game_folder, '..', 'Media')
-        self.map = TiledMap(path.join(media_folder, 'Base map.tmx'))
+
+        self.map = TiledMap(path.join(self.media_folder, 'Base map.tmx'))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
-        self.player_img = pg.image.load(path.join(media_folder, 'Base', PLAYER_IMG)).convert_alpha()
+        self.player_img = pg.image.load(path.join(self.media_folder, 'Base', PLAYER_IMG)).convert_alpha()
         self.dim_screen = pg.Surface(self.screen.get_size()).convert_alpha()
         self.dim_screen.fill((0,0,0, 180))
 
@@ -47,12 +50,20 @@ class Game:
         self.playing = True
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000.0
-            if self.on_minigame:
-                self.minigame_instance.tick()
+            if self.minigame_class:
+                if(self.on_minigame):
+                    self.on_minigame.tick()
+                else:
+                    self.on_minigame = self.minigame_class(self.quit_minigame, self)
             else:
                 self.events()
                 self.update()
                 self.draw()
+
+    def quit_minigame(self):
+        self.go_to_minigame = False
+        self.on_minigame = False
+        self.minigame_class = False
 
     def quit(self):
         pg.quit()

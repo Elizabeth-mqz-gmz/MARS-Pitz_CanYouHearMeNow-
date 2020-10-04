@@ -26,7 +26,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32791a98-5082-4971-a29a-8f171410bd66" name="Default Changelist" comment="" />
+    <list default="true" id="32791a98-5082-4971-a29a-8f171410bd66" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Antena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Minigames/Antena.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/antenna.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +59,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\adria\Desktop\CanYouHearMeNow\Code\Minigames" />
       <recent name="C:\Users\adria\Desktop\CanYouHearMeNow\Media" />
       <recent name="C:\Users\adria\Desktop\CanYouHearMeNow\Media\Base" />
     </key>
@@ -67,6 +74,7 @@
       <updated>1601833284903</updated>
       <workItem from="1601833286661" duration="11971000" />
       <workItem from="1601849671873" duration="701000" />
+      <workItem from="1601850880483" duration="2082000" />
     </task>
     <servers />
   </component>
