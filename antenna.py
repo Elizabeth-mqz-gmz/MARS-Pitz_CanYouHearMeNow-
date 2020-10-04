@@ -27,6 +27,7 @@ prgImg = pg.image.load('./Media/Antenna/Paragraph.png')
 cldImg = pg.image.load('./Media/Antenna/Cloud.png')
 barImg = pg.image.load('./Media/Antenna/Bar.png')
 winImg = pg.image.load('./Media/Antenna/Win.png')
+lseImg = pg.image.load('./Media/Antenna/Lose.png')
 
 # Resize the images
 sunImg = pg.transform.scale(sunImg, (500, 500))
@@ -40,6 +41,7 @@ prgImg = pg.transform.scale(prgImg, (300, 270))
 cldImg = pg.transform.scale(cldImg, (100, 100))
 barImg = pg.transform.scale(barImg, (333, 665))
 winImg = pg.transform.scale(winImg, (384, 96))
+lseImg = pg.transform.scale(lseImg, (384, 96))
 
 def Draw(level, sublevel, limits, vel, fg):
     # Paint the background
@@ -75,6 +77,15 @@ def Win():
             screen.blit(winImg, (108,276),(0,0,384,48))
         else:
             screen.blit(winImg, (108,276),(0,48,384,48))
+        pg.display.update()
+        tm.sleep(1)
+
+def Lose():
+    for x in [1,2,3,4,5]:
+        if x%2 == 0:
+            screen.blit(lseImg, (108,276),(0,0,384,48))
+        else:
+            screen.blit(lseImg, (108,276),(0,48,384,48))
         pg.display.update()
         tm.sleep(1)
 
@@ -184,8 +195,8 @@ while not gameExit:
                         BarUpdate(counterLevel,counterSubLevel)
                     else:
                         lose = True
-                        tm.sleep(3)
-                        #msg loser
+                        tm.sleep(1)
+                        Lose()
                 else:
                     startedGame = True
 
