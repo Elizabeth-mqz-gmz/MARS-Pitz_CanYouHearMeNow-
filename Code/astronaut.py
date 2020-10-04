@@ -65,25 +65,14 @@ class Astronaut:
 class Obstacle:
     def __init__(self, image, x, y):
         self.image = pg.image.load(MEDIAPATH + image)
-        self.image = pg.transform.scale(self.image, (self.image.get_width()*3, self.image.get_height()*3))
-
-        self.sprite = self.defineObs()
+        self.image = pg.transform.scale(self.image, (78,56))
         self.coord = [x,y]
         self.pas = False
-
-    def defineObs(self):
-        rand = random.randrange(0, 6)
-        rand = 5
-        w = self.image.get_width() / 2
-        h = self.image.get_height() / 3
-        sprites = [[0,0],[w,0], [0,h], [w,h],[0,h*2], [w,h*2]]
-        return (sprites[rand][0],sprites[rand][1], sprites[rand][0]+w, sprites[rand][1]+h)
 
     def move(self, vel):
         if self.image.get_width() + self.coord[0] > 0:
             self.coord[0] -= vel
-            gameDisplay.blit(self.image, (self.coord[0], self.coord[1]), self.sprite)
-
+            gameDisplay.blit(self.image, (self.coord[0], self.coord[1]))
         #The atronaut pased the obstacle
         else:
             self.pas = True
@@ -151,8 +140,8 @@ def gameLoop():
     astro = Astronaut("Run.png")
     # obs1 = Obstacle("obstacle1.png")
     obs_vec,obs_vec_up = [], []
-    obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 50 ))
-    obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth - 65,displayHeight - 500 ))
+    obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 56 ))
+    obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth - 70,displayHeight - 350 ))
 
     points = 0
     # interference
@@ -185,7 +174,7 @@ def gameLoop():
                     # Make random the time of creation of new obstacles
                     time = random.randrange(2,6)
                     pg.time.set_timer(pg.USEREVENT+1, 1000*time)
-                    obs_vec.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 50 ))
+                    obs_vec.append(Obstacle("Obstacle{}.png".format(random.randrange(1,7)),displayWidth,displayHeight - 56 ))
 
                 if event.type == pg.USEREVENT+2:
                     pg.time.set_timer(pg.USEREVENT+2, 0)
@@ -196,7 +185,7 @@ def gameLoop():
                     change = True
 
                 if event.type == pg.USEREVENT+4:
-                    obs_vec_up.append(Obstacle("Obstacle1.png",displayWidth,displayHeight - 500 ))
+                    obs_vec_up.append(Obstacle("Obstacle{}.png".format(random.randrange(1,6)),displayWidth,displayHeight - 350 ))
 
             gameDisplay.fill((0,0,0))
 
