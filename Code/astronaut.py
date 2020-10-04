@@ -57,6 +57,54 @@ def check(astro,obs):
 def printImage (image,x,y):
     gameDisplay.blit(image, (x,y))
 
+def Final_Msg(points):
+	pg.init()
+
+	# define the RGB value for colors,
+	white = (255, 255, 255)
+	green = (0, 255, 0)
+	blue = (0, 0, 128)
+	black = (0, 0, 0)
+
+	# assigning values to X and Y variable
+	X = 700
+	Y = 500
+	display_surface = pg.display.set_mode((X, Y ))
+
+	# set the pygame window name
+	pg.display.set_caption('Show Text')
+
+	# create a font object.
+	font = pg.font.Font('freesansbold.ttf', 16)
+
+	# create a text suface object, on which text is drawn on it.
+	text = font.render('Good Job. You obtained ' + str(points) +' points. We encourage you to keep trying!', True, green, blue)
+
+	# create a rectangular object for the text surface object
+	textRect = text.get_rect()
+
+	# set the center of the rectangular object.
+	textRect.center = (X // 2, Y // 2)
+
+	# infinite loop
+	while True :
+		display_surface.fill(black)
+
+		# copying the text surface object to the display surface object  at the center coordinate.
+		display_surface.blit(text, textRect)
+
+		# iterate over the list of Event objects  that was returned by pygame.event.get() method.
+		for event in pg.event.get():
+
+			# if event object type is QUIT then quitting the pygame  and program both.
+			if event.type == pg.QUIT:
+				# deactivates the pygame library
+				pg.quit()
+				# quit the program.
+				quit()
+			# Draws the surface object to the screen.
+			pg.display.update()
+
 def gameLoop():
 
     astro = Astronaut("astronaut.png")
@@ -69,6 +117,9 @@ def gameLoop():
     # interference
     # The astronaut could receive the instructions with delay
     inter = 1
+
+    change = False
+    time = 1
 
     #Loop if the Astronaut doesn´t crash or the user doesn't close the game
     while not astro.crashed:
@@ -85,6 +136,11 @@ def gameLoop():
                         pg.time.set_timer(pg.USEREVENT+2, 100*inter)
 
                 if event.type == pg.USEREVENT+1:
+                    # print(time)
+                    if time > 3 and change:
+                        inter = random.randrange(1, 5)
+                        print(inter)
+                        change = False
                     # Make random the time of creation of new obstacles
                     time = random.randrange(1,6)
                     pg.time.set_timer(pg.USEREVENT+1, 1000*time)
@@ -92,9 +148,11 @@ def gameLoop():
 
                 if event.type == pg.USEREVENT+2:
                     pg.time.set_timer(pg.USEREVENT+2, 0)
-                    print(event.type)
                     astro.jumpping["isJummping"] = True
                     astro.jumpping["up"] = True
+
+                if event.type == pg.USEREVENT+3:
+                    change = True
 
             gameDisplay.fill((0,0,0))
 
@@ -130,8 +188,11 @@ clock = pg.time.Clock()
 # Set an event to instance obstacles
 pg.time.set_timer(pg.USEREVENT+1, 6000)
 
-print(gameLoop())
-# Exit from the game
+# Change the delay
+pg.time.set_timer(pg.USEREVENT+3, 2000)
 
+points = gameLoop()
+# Exit from the game
+Final_Msg(points)
 pg.quit()
 quit()
