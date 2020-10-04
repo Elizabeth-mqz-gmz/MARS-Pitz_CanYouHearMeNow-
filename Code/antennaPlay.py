@@ -1,6 +1,5 @@
 import pygame as pg
 import random as rd
-from textwrap import fill
 
 
 #init and display
@@ -23,6 +22,7 @@ walImg = pg.image.load('../Media/Antenna/Wall.png')
 wvsImg = pg.image.load('../Media/Antenna/Waves.png')
 srnImg = pg.image.load('../Media/Antenna/Screen.png')
 prgImg = pg.image.load('../Media/Antenna/Paragraph.png')
+cldImg = pg.image.load('../Media/Antenna/Cloud.png')
 
 sunImg = pg.transform.scale(sunImg, (500, 500))
 conImg = pg.transform.scale(conImg, (500, 250))
@@ -32,11 +32,14 @@ walImg = pg.transform.scale(walImg, (300, 600))
 wvsImg = pg.transform.scale(wvsImg, (531, 1062))
 srnImg = pg.transform.scale(srnImg, (250, 500))
 prgImg = pg.transform.scale(prgImg, (200, 270))
+cldImg = pg.transform.scale(cldImg, (100, 100))
 
 
 #background paint
 screen.fill((160,255,244))
 
+screen.blit(cldImg, (500,80))
+screen.blit(cldImg, (300,120))
 screen.blit(antImg, (300,100))
 screen.blit(wndImg, (300,0))
 screen.blit(walImg, (0,0))
@@ -46,14 +49,6 @@ screen.blit(prgImg, (0,0))
 screen.blit(sunImg, (0,380),(0,0,250,250))
 
 
-
-pgp = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet augue sed ligula faucibus dictum eu quis purus. Etiam ac dui magna. Phasellus eleifend, enim et ullamcorper pharetra, sapien diam faucibus massa, at laoreet nulla magna ut arcu. Mauris sodales quis mi eu scelerisque.\n Vestibulum sed malesuada sapien. Donec ut pulvinar lectus. Vivamus volutpat, augue quis lobortis maximus, sapien dui varius diam, vel scelerisque tellus sapien lacinia nisl. Donec.'
-pgpf = fill(pgp, 50)
-
-pg.font.init()
-label = pg.font.SysFont('Sans Roman', 20)
-txt = label.render(pgpf, False, (0, 0, 0))
-#screen.blit(txt,(0,0),(0,0,200,500))
 
 #test
 v=0
