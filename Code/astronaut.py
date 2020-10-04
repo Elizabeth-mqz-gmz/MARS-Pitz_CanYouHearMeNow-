@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 
 class Astronaut:
     def __init__(self,image):
@@ -15,7 +16,7 @@ class Astronaut:
         #finishes a jump cycle, this means
         #that he must go up and down to do it again
 
-        max = 100
+        max = 200
         min = displayHeight - self.image.get_height()
         increment = 1
 
@@ -50,7 +51,6 @@ class Obstacle:
 
 def check(astro,obs):
     if astro.image.get_height() + astro.coord[1] >= obs.coord[1]:
-        print("crash")
         return True
 
 
@@ -65,8 +65,12 @@ def gameLoop():
     obs_vec = []
     obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
 
+    points = 0
+    # interference
+    # The astronaut could receive the instructions with delay
+    inter = 1
+
     #Loop if the Astronaut doesn´t crash or the user doesn't close the game
-    points=0
     while not astro.crashed:
 
             for event in pg.event.get():
@@ -78,11 +82,19 @@ def gameLoop():
 
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_UP and not astro.jumpping["isJummping"]:
-                        astro.jumpping["isJummping"] = True
-                        astro.jumpping["up"] = True
+                        pg.time.set_timer(pg.USEREVENT+2, 100*inter)
 
                 if event.type == pg.USEREVENT+1:
+                    # Make random the time of creation of new obstacles
+                    time = random.randrange(1,6)
+                    pg.time.set_timer(pg.USEREVENT+1, 1000*time)
                     obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
+
+                if event.type == pg.USEREVENT+2:
+                    pg.time.set_timer(pg.USEREVENT+2, 0)
+                    print(event.type)
+                    astro.jumpping["isJummping"] = True
+                    astro.jumpping["up"] = True
 
             gameDisplay.fill((0,0,0))
 
@@ -96,13 +108,16 @@ def gameLoop():
                     obs_vec[i].move(2)
                     i += 1
                 else:
-                    points += 1
+                    points += 1*inter
                     obs = obs_vec.pop(0)
                     del obs
 
 
             astro.jump()
             pg.display.flip()
+    return points
+
+# -------
 
 displayWidth = 800
 displayHeight = 600
@@ -112,10 +127,10 @@ gameDisplay = pg.display.set_mode((displayWidth, displayHeight))
 pg.display.set_caption("MARS-Pitz - Astronaut")
 clock = pg.time.Clock()
 
-# evento = pygame.event.Event(pygame.USEREVENT, some_attr=1, other_attr='1')
+# Set an event to instance obstacles
 pg.time.set_timer(pg.USEREVENT+1, 6000)
 
-gameLoop()
+print(gameLoop())
 # Exit from the game
 
 pg.quit()
