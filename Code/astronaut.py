@@ -5,6 +5,7 @@ class Astronaut:
         self.image = pg.image.load(image)
         self.coord = [0,displayHeight-self.image.get_height()]
         self.crashed = False
+        self.foot = (self.image.get_width()/2 - 20, self.image.get_width()/2 + 20)
         self.jumpping = { "isJummping" : False,
                             "up" : False}
 
@@ -15,8 +16,8 @@ class Astronaut:
         #that he must go up and down to do it again
 
         max = 100
-        min = 400
-        increment = 3
+        min = displayHeight - self.image.get_height()
+        increment = 1
 
         if self.jumpping["isJummping"]:
             if self.coord[1] > max and self.jumpping["up"]:
@@ -33,19 +34,19 @@ class Astronaut:
         printImage(self.image, self.coord[0], self.coord[1])
 
 class Obstacle:
-    def __init__(self, image):
+    def __init__(self, image, x, y):
         self.image = pg.image.load(image)
-        self.coord = [displayWidth,displayHeight-self.image.get_height()]
-        self.passo = False
+        self.coord = [x,y]
+        self.pas = False
 
     def move(self, vel):
         if self.image.get_width() + self.coord[0] > 0:
             self.coord[0] -= vel
             printImage(self.image, self.coord[0],self.coord[1])
 
-        #The atronaut passed the obstacle
+        #The atronaut pased the obstacle
         else:
-            self.passo = True
+            self.pas = True
 
 def check(astro,obs):
     if astro.image.get_height() + astro.coord[1] >= obs.coord[1]:
@@ -59,8 +60,13 @@ def printImage (image,x,y):
 def gameLoop():
 
     astro = Astronaut("astronaut.png")
-    obs1 = Obstacle("obstacle1.png")
+    # obs1 = Obstacle("obstacle1.png")
+    no_objetos = 20
+    obs_vec = []
+    obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
+
     #Loop if the Astronaut doesn´t crash or the user doesn't close the game
+    points=0
     while not astro.crashed:
 
             for event in pg.event.get():
@@ -75,11 +81,26 @@ def gameLoop():
                         astro.jumpping["isJummping"] = True
                         astro.jumpping["up"] = True
 
+                if event.type == pg.USEREVENT+1:
+                    obs_vec.append(Obstacle("obstacle1.png",displayWidth,displayHeight - 50 ))
+
             gameDisplay.fill((0,0,0))
-            if not obs1.passo:
-                obs1.move(5)
-            if obs1.coord[0] <= astro.image.get_width()-20:
-                astro.crashed = check(astro, obs1)
+
+            if len(obs_vec):
+                if obs_vec[0].coord[0] <= astro.foot[1] and obs_vec[0].coord[0] >= astro.foot[0]:
+                    astro.crashed = check(astro, obs_vec[0])
+
+            i = 0
+            while i < len(obs_vec):
+                if not obs_vec[i].pas:
+                    obs_vec[i].move(2)
+                    i += 1
+                else:
+                    points += 1
+                    obs = obs_vec.pop(0)
+                    del obs
+
+
             astro.jump()
             pg.display.flip()
 
@@ -91,8 +112,11 @@ gameDisplay = pg.display.set_mode((displayWidth, displayHeight))
 pg.display.set_caption("MARS-Pitz - Astronaut")
 clock = pg.time.Clock()
 
+# evento = pygame.event.Event(pygame.USEREVENT, some_attr=1, other_attr='1')
+pg.time.set_timer(pg.USEREVENT+1, 6000)
+
 gameLoop()
 # Exit from the game
 
-game.quit()
+pg.quit()
 quit()
