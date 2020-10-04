@@ -1,10 +1,9 @@
 import pygame as pg
-import utilities
 
 class Astronaut:
-    def __init__(self,image,x,y):
-        self.image = image
-        self.coord = [x,y]
+    def __init__(self,image):
+        self.image = pg.image.load(image)
+        self.coord = [0,displayHeight-self.image.get_height()]
         self.crashed = False
         self.jumpping = { "isJummping" : False,
                             "up" : False}
@@ -34,15 +33,24 @@ class Astronaut:
         printImage(self.image, self.coord[0], self.coord[1])
 
 class Obstacle:
-    def __init__(self, image, x,y):
-        self.image = image
-        self.coord = [x,y]
+    def __init__(self, image):
+        self.image = pg.image.load(image)
+        self.coord = [displayWidth,displayHeight-self.image.get_height()]
+        self.passo = False
 
-    def move():
-        
+    def move(self, vel):
+        if self.image.get_width() + self.coord[0] > 0:
+            self.coord[0] -= vel
+            printImage(self.image, self.coord[0],self.coord[1])
 
-def check(Astronaut astronaut, Obstacle obstacle)
+        #The atronaut passed the obstacle
+        else:
+            self.passo = True
 
+def check(astro,obs):
+    if astro.image.get_height() + astro.coord[1] >= obs.coord[1]:
+        print("crash")
+        return True
 
 
 def printImage (image,x,y):
@@ -50,7 +58,8 @@ def printImage (image,x,y):
 
 def gameLoop():
 
-    astro = Astronaut(pg.image.load("astronaut.png"), 0, 400)
+    astro = Astronaut("astronaut.png")
+    obs1 = Obstacle("obstacle1.png")
     #Loop if the Astronaut doesn´t crash or the user doesn't close the game
     while not astro.crashed:
 
@@ -67,11 +76,15 @@ def gameLoop():
                         astro.jumpping["up"] = True
 
             gameDisplay.fill((0,0,0))
+            if not obs1.passo:
+                obs1.move(5)
+            if obs1.coord[0] <= astro.image.get_width()-20:
+                astro.crashed = check(astro, obs1)
             astro.jump()
             pg.display.flip()
 
 displayWidth = 800
-displayHeight = 800
+displayHeight = 600
 
 #Initiate the window
 gameDisplay = pg.display.set_mode((displayWidth, displayHeight))
@@ -80,5 +93,6 @@ clock = pg.time.Clock()
 
 gameLoop()
 # Exit from the game
+
 game.quit()
 quit()
