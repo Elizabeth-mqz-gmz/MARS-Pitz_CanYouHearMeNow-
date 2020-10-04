@@ -9,10 +9,19 @@ screen = pg.display.set_mode((600,600))
 pg.display.set_caption("Marz-Pitz")
 
    
+##intervalos
+a1 = 0.5
+a2 = 1.5
+b1 = 2
+b2 = 3
+c1 = 4
+c2 = 5
+
 #level
 l = rd.randint(0,2)
 
 #images
+
 
 sunImg = pg.image.load('../Media/Antenna/Orbits.png')
 conImg = pg.image.load('../Media/Antenna/Console.png')
@@ -76,25 +85,25 @@ pg.display.update()
 
 def onda(vel,lev):
     if lev == 0:
-        if vel == 0:
+        if vel > a1 and vel <= a2:
             screen.blit(wvsImg, (390,0),(177,0,177,354))   
-        elif vel == 1:
+        elif vel > b1 and vel < a1:
             screen.blit(wvsImg, (390,0),(354,354,177,354))   
-        elif vel == 2:    
+        else:    
             screen.blit(wvsImg, (390,0),(0,708,177,354))   
     elif lev == 1:
-        if vel == 0:
+        if vel > b2:
             screen.blit(wvsImg, (390,0),(354,0,177,354))   
-        elif vel == 1:
+        elif vel > b1 and vel <= b2:
             screen.blit(wvsImg, (390,0),(0,354,177,354))   
-        elif vel == 2:    
+        else:    
             screen.blit(wvsImg, (390,0),(0,708,177,354))   
     elif lev == 2:
-        if vel == 0:
+        if vel > a1:
             screen.blit(wvsImg, (390,0),(354,0,177,354))   
-        elif vel == 1:
+        elif vel > b2 and vel <= a1:
             screen.blit(wvsImg, (390,0),(354,354,177,354))   
-        elif vel ==2:    
+        elif vel > c1 and vel <= c2:    
             screen.blit(wvsImg, (390,0),(354,708,177,354))   
 
 
@@ -119,7 +128,7 @@ while playing:
 
     #barUpdate(2,3)
     
-    onda(v,l)
+    onda(6.3,0)
 
     pg.display.update()
 
