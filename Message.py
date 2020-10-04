@@ -1,4 +1,5 @@
 import pygame as pg
+import pygame_textinput
 import random as rd
 
 #Words
@@ -7,11 +8,23 @@ words = [ "MARS", "EARTH", "SPACE", "NASA", "STAR", "SPACESHIP", "HUMAN", "MARTI
 
 #Cifrate a word
 def Cifr():
-    w = words[rd.randint(0,len(words))]
-    print(w)
-    index = []
-    for l in len(w):
-        print(l)
+    w = words[rd.randint(0,len(words)-1)]
+    index = [None] * 16
+    cont = 0
+    for l in w:
+        if l not in index:
+            index[cont] = l
+            cont += 1
+    for i in index:
+        while cont < len(index):
+            val = abc[rd.randint(0,len(abc)-1)]
+            if val not in index:
+                index[cont] = val
+                cont += 1
+
+    rd.shuffle(index)
+    print(index)
+    return index
 
 Cifr()
 
@@ -32,13 +45,18 @@ def putLetter(leter,x,y):
 putLetter("A",10,30)
 
 
+textinput = pygame_textinput.TextInput()
+
 playing = True
 while playing:
     for events in pg.event.get():
         if events.type == pg.QUIT:
             playing = False
 
-
+     
+    events = pg.event.get()
+    textinput.update(events)
+    screen.blit(textinput.get_surface(), (10, 10))
     pg.display.update()
 
 
