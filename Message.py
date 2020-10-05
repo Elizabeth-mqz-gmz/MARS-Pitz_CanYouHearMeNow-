@@ -11,9 +11,11 @@ index = [None] * 16
 
 winImg = pg.image.load('./Media/Message/Win.png')
 lseImg = pg.image.load('./Media/Message/Lose.png')
+symImg = pg.image.load('./Media/Message/Symbols.png')
 
 winImg = pg.transform.scale(winImg, (384, 96))
 lseImg = pg.transform.scale(lseImg, (384, 96))
+symImg = pg.transform.scale(symImg, (384, 320))
 
 
 #Cifrate a word
@@ -65,7 +67,40 @@ def lose():
             screen.blit(lseImg, (108, 276), (0, 48, 384, 48))
         pg.display.update()
         tm.sleep(1)
-#putLetter("ABC",10,30)
+def paint(pal):
+    putLetter("Decipher the word",10,30)
+    con = 0
+    coords = [(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1)]
+    while con < 16:    
+        rx = rd.randint(0,5)
+        ry = rd.randint(0,4)
+        if [rx,ry] not in coords:
+            coords[con]=[rx,ry]
+            con += 1
+    con = 0
+    for x in range(0,4):
+        for y in range(0,4):
+            screen.blit(symImg, (100*x, (70*y)+100), (coords[con][0]*64, coords[con][1]*64, 64, 64))
+            aj = 0
+            if x == 1:
+                aj = 0.6
+            elif x == 2:
+                aj = 1
+            elif x == 3:
+                aj = 1.4 
+            putLetter(index[con],70*(x+aj+1),(65*y)+130)
+
+            con += 1
+
+    cx = 0
+    for a in pal:
+        
+        po = index.index(a)
+        screen.blit(symImg, (70*cx, 400), (coords[po][0]*64, coords[po][1]*64, 64, 64))    
+        cx+=1
+
+    
+    pg.display.update()
 
 playing = True
 while playing:
@@ -75,6 +110,7 @@ while playing:
     print(pal)
     missing = len(pal)
     screen.fill((0,0,0))
+    paint(pal)
     while (not loser) and playing:
         for events in pg.event.get():
             if events.type == pg.QUIT:
@@ -86,11 +122,11 @@ while playing:
                         if abc[lt] in pal:
                             pos = pal.index(abc[lt])
                             pal[pos] = " "
-                            putLetter(abc[lt],30*(pos+2),30)
+                            putLetter(abc[lt],30*(pos+2),480)
                             missing -= 1
                         else:
                             errCount += 1
-                            putLetter("X",30*(errCount+2),90)
+                            putLetter("X",30*(errCount+2),520)
                         if missing == 0:
                             win()
                         if errCount == 3:
