@@ -49,13 +49,14 @@ A robot is an amazing partner in a mars exploration, but who will help it when i
 
 To execute the program, it is necessary to run in the command line the following instruction:
 
-`python code/main.py`
+`python3 code/main.py`
 
 ### Tools and resources 
 - Python3
+- Pygame
 - Atom
 - Teletype (Atom)
-- Pygame
+- Tiled Map Editor
 
 ### References
 
@@ -70,9 +71,9 @@ To execute the program, it is necessary to run in the command line the following
 
 
 ### Authors
-- Juan Adrián Rodriguez .... - adrian.rodriguez7109@gmail.com
+- Juan Adrián Rodriguez - adrian.rodriguez7109@gmail.com
 - Salvador Gonzalez Juarez - salvadorglzjrz@gmail.com
-- Alan Joel Orihuela ... - alanjoelori@gmail.com
+- Alan Joel Orihuela García - alanjoelori@gmail.com
 - María Emilia Ramirez Gomez - mariaemiliaramirezgomez@gmail.com
 - Kevin Meza Landeros - kevin7mvp@gmail.com
 - Elizabeth Marquez Gomez - elimqzgmz@gmail.com
