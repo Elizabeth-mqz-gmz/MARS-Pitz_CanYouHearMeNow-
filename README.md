@@ -54,6 +54,13 @@ To execute the program, it is necessary to run in the command line the following
 
 `python3 code/main.py`
 
+### Our future purposes
+
+We believe the project is highly scalable. It is still possible to add new games, some of which we have already planned and started. We can also modify the initial interface to make it look more like a spatial control center, as well as add more information in order to have a greater impact on users.
+
+### Demo
+https://docs.google.com/presentation/d/1xrZM-V1iYGxkjqWZWWnu6_F9NWdaI_cSwfx1n0aBQ88/edit?usp=sharing
+
 ### Tools and resources 
 - Python3
 - Pygame
