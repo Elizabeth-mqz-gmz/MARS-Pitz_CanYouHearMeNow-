@@ -70,15 +70,18 @@ https://docs.google.com/presentation/d/1xrZM-V1iYGxkjqWZWWnu6_F9NWdaI_cSwfx1n0aB
 
 ### References
 
-- NASA Solar System Exploration. 2020. Mars. [online] Available at: <https://solarsystem.nasa.gov/planets/mars/overview/> [Accessed 4 October 2020].
-- NASA’s Mars Exploration Program. 2020. NASA’S Mars Exploration Program. [online] Available at: <https://mars.nasa.gov/> [Accessed 4 October 2020].
-- NASA's InSight Mars Lander. 2020. Communications | Mission – NASA's Insight Mars Lander. [online] Available at: <https://mars.nasa.gov/insight/mission/communications/> [Accessed 4 October 2020].
-- NASA. 2020. About The Deep Space Network. [online] Available at: <https://www.nasa.gov/directorates/heo/scan/services/networks/deep_space_network/about> [Accessed 4 October 2020].
-- NASA. 2020. Deep Space Optical Communications (DSOC). [online] Available at: <https://www.nasa.gov/mission_pages/tdm/dsoc/index.html> [Accessed 4 October 2020].
-- NASA's Eyes. 2020. NASA’S Eyes. [online] Available at: <https://eyes.nasa.gov/> [Accessed 4 October 2020].
-- Mars.nasa.gov. 2020. Communications. [online] Available at: <https://mars.nasa.gov/mars2020/spacecraft/rover/communications/> [Accessed 4 October 2020].
-- NASA’s Mars Exploration Program. 2020. Communications With Earth | Mission – NASA’S Mars Exploration Program. [online] Available at: <https://mars.nasa.gov/msl/mission/communications/> [Accessed 4 October 2020].
-
+- NASA Solar System Exploration. 2020. Mars. [online] Available at: https://solarsystem.nasa.gov/planets/mars/overview/ [Accessed 4 October 2020].
+- NASA’s Mars Exploration Program. 2020. NASA’S Mars Exploration Program. [online] Available at: https://mars.nasa.gov/ [Accessed 4 October 2020].
+- NASA's InSight Mars Lander. 2020. Communications | Mission – NASA's Insight Mars Lander. [online] Available at: https://mars.nasa.gov/insight/mission/communications/ [Accessed 4 October 2020].
+- NASA. 2020. About The Deep Space Network. [online] Available at: https://www.nasa.gov/directorates/heo/scan/services/networks/deep_space_network/about [Accessed 4 October 2020].
+- NASA. 2020. Deep Space Optical Communications (DSOC). [online] Available at: https://www.nasa.gov/mission_pages/tdm/dsoc/index.html [Accessed 4 October 2020].
+- NASA's Eyes. 2020. NASA’S Eyes. [online] Available at: https://eyes.nasa.gov/ [Accessed 4 October 2020].
+- Mars.nasa.gov. 2020. Communications. [online] Available at: https://mars.nasa.gov/mars2020/spacecraft/rover/communications/ [Accessed 4 October 2020].
+- NASA’s Mars Exploration Program. 2020. Communications With Earth | Mission – NASA’S Mars Exploration Program. [online] Available at: https://mars.nasa.gov/msl/mission/communications/ [Accessed 4 October 2020].
+- Mars Odyssey Orbiter. (2020). Retrieved 4 October 2020, from https://mars.nasa.gov/odyssey/
+- Communications with Earth | Mission – NASA’s Mars Exploration Program . (2020). Retrieved 4 October 2020, from https://mars.nasa.gov/msl/mission/communications/
+- Deep Space Network Now. (2020). Retrieved 4 October 2020, from https://eyes.nasa.gov/dsn/dsn.html
+- Overview. (2020). Retrieved 4 October 2020, from https://mars.nasa.gov/odyssey/mission/overview/
 
 ### Authors
 - Juan Adrián Rodriguez - adrian.rodriguez7109@gmail.com
