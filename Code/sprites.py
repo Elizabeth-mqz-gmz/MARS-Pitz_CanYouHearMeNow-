@@ -42,7 +42,7 @@ class Player(pg.sprite.Sprite):
             print(self.game.go_to_minigame)
             print(self.game.on_minigame)
             if self.collide_with_mini_game() and self.game.go_to_minigame and not self.game.on_minigame:
-                if self.game.go_to_minigame == 'Antena':
+                if self.game.go_to_minigame == 'Mars Odyssey':
                     self.game.minigame_class = Antena
                 elif self.game.go_to_minigame == 'Astronaut':
                     self.game.minigame_class = AstronautGame

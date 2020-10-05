@@ -143,7 +143,7 @@ def Final_Msg(points):
             pg.display.update()
 
 
-pg.display.set_caption("Mars Odyssey - Astronaut")
+pg.display.set_caption("Mars-Pitz - Astronaut")
 clock = pg.time.Clock()
 displayWidth = 800
 displayHeight = 600

@@ -30,6 +30,8 @@
       <change beforePath="$PROJECT_DIR$/Code/Minigames/Antena.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Minigames/Antena.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Minigames/Astronaut.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Minigames/Astronaut.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Media/Base map.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/Media/Base map.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +77,7 @@
       <workItem from="1601833286661" duration="11971000" />
       <workItem from="1601849671873" duration="701000" />
       <workItem from="1601850880483" duration="5568000" />
-      <workItem from="1601856462909" duration="2970000" />
+      <workItem from="1601856462909" duration="3679000" />
     </task>
     <servers />
   </component>
@@ -119,10 +121,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="346" key="SettingsEditor/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1601855481761" />
-    <state x="988" y="300" width="585" height="801" key="find.popup" timestamp="1601859433451">
+    <state x="988" y="300" width="585" height="801" key="find.popup" timestamp="1601860846538">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="988" y="300" width="585" height="801" key="find.popup/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1601859433451" />
+    <state x="988" y="300" width="585" height="801" key="find.popup/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1601860846538" />
     <state x="1063" y="414" key="git4idea.branch.GitSmartOperationDialog" timestamp="1601849389003">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

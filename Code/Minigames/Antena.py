@@ -8,7 +8,7 @@ class Antena:
         self.game = game
         self.screen = game.screen
         self.limits = [5, 7, 2, 4, 0, 1]
-        pg.display.set_caption('Mars Odyssey - Antenna')
+        pg.display.set_caption('Mars-Pitz - Antenna')
         self.run()
         self.clock = pg.time.Clock()
         self.clock.tick()
