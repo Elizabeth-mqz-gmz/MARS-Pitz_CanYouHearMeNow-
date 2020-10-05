@@ -34,16 +34,17 @@ Having data is not everything, it must have a meaning!
 
 Now, you have to take the data and interpret it to see what people from Mars want to tell us.
 
-
-Comming soon...
-
 ***Follow the signals***
 
 Choose the appropriate position of the satellites to make the communication waves reach from one side to the other. It is not as easy as it seems when the planets start to orbit
 
+Comming soon...
+
 ***Fix Rover***
 
 A robot is an amazing partner in a mars exploration, but who will help it when it get damaged?
+
+Comming soon...
 
 ### Manual
 
