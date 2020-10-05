@@ -47,9 +47,9 @@ explain
 
 
 ### Authors
-- Juan Adrián Rodriguez .... -
+- Juan Adrián Rodriguez .... - adrian.rodriguez7109@gmail.com
 - Salvador Gonzalez Juarez - salvadorglzjrz@gmail.com
-- Alan Joel Orihuela ... -
-- María Emilia Ramirez Gomez -
-- Kevin Meza Landeros - 
+- Alan Joel Orihuela ... - alanjoelori@gmail.com
+- María Emilia Ramirez Gomez - mariaemiliaramirezgomez@gmail.com
+- Kevin Meza Landeros - kevin7mvp@gmail.com
 - Elizabeth Marquez Gomez - elimqzgmz@gmail.com
