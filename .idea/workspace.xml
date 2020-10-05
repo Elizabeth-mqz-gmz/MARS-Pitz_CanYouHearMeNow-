@@ -21,16 +21,17 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/detalles" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/astronaut" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32791a98-5082-4971-a29a-8f171410bd66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CanYouHearMeNow.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CanYouHearMeNow.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/Minigames/Astronaut.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/astronaut.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Media/Base map.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/Media/Base map.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/sprites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,8 @@
       <updated>1601833284903</updated>
       <workItem from="1601833286661" duration="11971000" />
       <workItem from="1601849671873" duration="701000" />
-      <workItem from="1601850880483" duration="5483000" />
+      <workItem from="1601850880483" duration="5568000" />
+      <workItem from="1601856462909" duration="2753000" />
     </task>
     <servers />
   </component>
@@ -92,7 +94,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/detalles" />
+                        <option value="origin/astronaut" />
                       </list>
                     </value>
                   </entry>

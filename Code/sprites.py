@@ -2,6 +2,7 @@ import pygame as pg
 from settings import *
 from tilemap import collide_hit_rect
 import pytmx
+from Minigames.Astronaut import AstronautGame
 
 from Minigames.Antena import Antena
 
@@ -38,9 +39,13 @@ class Player(pg.sprite.Sprite):
             self.rot = 270
             self.vel.y = PLAYER_SPEED
         if keys[pg.K_f]:
+            print(self.game.go_to_minigame)
+            print(self.game.on_minigame)
             if self.collide_with_mini_game() and self.game.go_to_minigame and not self.game.on_minigame:
-                print(self.game.go_to_minigame)
-                self.game.minigame_class = Antena
+                if self.game.go_to_minigame == 'Antena':
+                    self.game.minigame_class = Antena
+                elif self.game.go_to_minigame == 'Astronaut':
+                    self.game.minigame_class = AstronautGame
 
     def collide_with_walls(self, dir):
         hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)

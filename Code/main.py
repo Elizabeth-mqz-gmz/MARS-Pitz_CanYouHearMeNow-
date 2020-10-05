@@ -52,6 +52,9 @@ class Game:
         # game loop - set self.playing = False to end the game
         self.playing = True
         while self.playing:
+            if self.on_minigame and not self.go_to_minigame:
+                self.quit_minigame()
+
             self.dt = self.clock.tick(FPS) / 1000.0
             if self.minigame_class:
                 if(self.on_minigame):
