@@ -1,6 +1,7 @@
 # NASA International Space Apps Challenge:
 
 ## Connect - Can you hear me now?
+
 This repository harbors all the scripts (python) and files used during the accomplishment of the NASA International Space Apps Challenge.
 
 ## Mars-Pitz
@@ -13,20 +14,42 @@ This repository harbors all the scripts (python) and files used during the accom
 
 ### Content
 
-***Buscar un nombre cool para Antenna.py***
-explain
-***Astronauta perdido***
-explain
-***Encoding***
-explain
-***Acomodar satélites***
-explain
-***Rover con retraso***
-explain
-***periodos de comunicación debido a posiciones del sol***
-explain
+***Mars Odyssey***
+
+The porpuse of the game is simulate the sending of information using *DSN* antenna. The sending present challenges because of the position of Mars and Earth wich are in constant movement, and this situation makes difficult the amount of data and frequency of sending between the planets.
+
+The gamer should press the space bar every certain time dependingon the position of the planets. He/She will cope 3 differents levels, each of them more difficult than the previous. 
+
+***Spacial Mission***
+
+Do you have the skills to guide an astronaut through his journey? 
+
+Be careful, your instructions may not arrive in time and he/she would find it difficult. During the way you can find obstacles, to avoid them it is necessary to press the up arrow key. 
+
+If you think it’s hard, just imagine what could happen in real life!
+
+***Dechipher the word***
+
+Having data is not everything, it must have a meaning!
+
+Now, you have to take the data and interpret it to see what people from Mars want to tell us.
+
+
+Comming soon...
+
+***Follow the signals***
+
+Choose the appropriate position of the satellites to make the communication waves reach from one side to the other. It is not as easy as it seems when the planets start to orbit
+
+***Fix Rover***
+
+A robot is an amazing partner in a mars exploration, but who will help it when it get damaged?
 
 ### Manual
+
+To execute the program, it is necessary to run in the command line the following instruction:
+
+`python code/main.py`
 
 ### Tools and resources 
 - Python3
