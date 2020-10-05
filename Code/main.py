@@ -1,5 +1,8 @@
 import pygame as pg
 import sys
+import os
+import time
+import Minigames.Antena
 from os import path
 from settings import *
 from sprites import *
@@ -38,7 +41,7 @@ class Game:
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'Player':
                 self.player = Player(self, tile_object.x/TILESIZE, tile_object.y/TILESIZE)
-            if tile_object.type == 'MiniGame':
+            elif tile_object.type == 'MiniGame':
                 MiniGame(self, tile_object.name, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             else:
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
